@@ -7,7 +7,7 @@ function App(): React.JSX.Element {
         <div className="App">
             <header className="App-header">
                 <h1>Welcome to My Application</h1>
-                HELLO WORLD! ANGEL ASOBO UD CISC275 with React Hooks and
+                Hello World! ANGEL ASOBO UD CISC275 with React Hooks and
                 TypeScript
             </header>
             <p>
