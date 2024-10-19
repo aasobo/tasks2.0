@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import myImage from "/Users/angelasobo/tasks2.0/src/celtics-1.jpeg";
+import myImage from "//Users/angelasobo/Desktop/tasks2.0/src/celtics-1.jpeg";
 import { Button, Container, Row, Col } from "react-bootstrap";
 
 function App(): React.JSX.Element {
