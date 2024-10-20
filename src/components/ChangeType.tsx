@@ -18,6 +18,7 @@ export function ChangeType(): React.JSX.Element {
     return (
         <div>
             <Button onClick={toggleQuestionType}>Change Type</Button>
+
             <div>
                 {questionType === "multiple_choice_question" ?
                     "Multiple Choice"
