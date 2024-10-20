@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 
 /**
@@ -12,39 +12,49 @@ export function d6(): number {
 }
 
 export function TwoDice(): React.JSX.Element {
-    const [leftDie, setLeftDie] = useState<number>(d6());
-    const [rightDie, setRightDie] = useState<number>(d6());
+    const [leftDie, setLeftDie] = useState<number>(2);
+    const [rightDie, setRightDie] = useState<number>(3);
+    const [gameResult, setGameResult] = useState<string>("");
 
-    // Ensure initial values are not the same
-    while (leftDie === rightDie) {
-        setRightDie(d6());
-    }
-
-    const rollLeftDie = () => {
-        setLeftDie(d6());
-    };
-
-    const rollRightDie = () => {
-        setRightDie(d6());
-    };
+    useEffect(() => {
+        if (leftDie === 1 && rightDie === 1) {
+            setGameResult("You Lose! (Snake Eyes)");
+        } else if (leftDie === rightDie) {
+            setGameResult("You Win! Matching dice.");
+        } else {
+            setGameResult("");
+        }
+    }, [leftDie, rightDie]);
 
     return (
         <div>
             <div>
-                <span data-testid="left-die">{leftDie}</span>
-                <span data-testid="right-die">{rightDie}</span>
+                <span data-testid="left-die">Left Die: {leftDie}</span>
+                <span data-testid="right-die">Right Die: {rightDie}</span>
             </div>
+
             <div>
-                <Button onClick={rollLeftDie}>Roll Left</Button>
-                <Button onClick={rollRightDie}>Roll Right</Button>
+                <Button
+                    aria-label="Roll Left"
+                    onClick={() => {
+                        const newValue = d6();
+                        setLeftDie(newValue);
+                    }}
+                >
+                    Roll Left
+                </Button>
+                <Button
+                    aria-label="Roll Right"
+                    onClick={() => {
+                        const newValue = d6();
+                        setRightDie(newValue);
+                    }}
+                >
+                    Roll Right
+                </Button>
             </div>
-            <div>
-                {leftDie === rightDie && leftDie === 1 ?
-                    <p>Lose</p>
-                : leftDie === rightDie ?
-                    <p>Win</p>
-                :   null}
-            </div>
+
+            {gameResult && <p>{gameResult}</p>}
         </div>
     );
 }
